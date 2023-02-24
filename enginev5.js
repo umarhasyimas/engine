@@ -74,7 +74,7 @@ function showpage(index) {
 function showNext() {
     if (glbCurrentpage >= pages.length) {
         if (wrapOn == true) {
-            self.location = "https://web.archive.org/web/20131216042045/http://www.mangafire.net/p/maaf.html";
+            self.location = "https://www.mahakurawa.my.id";
         }
     } else {
         glbCurrentpage += 1;
