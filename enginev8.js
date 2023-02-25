@@ -27,7 +27,7 @@ function createRequestObject() {
         numKP++;
     }
     keypairs[numKP] = query;
-    for(var i = 0; i < keypairs.length; i++) {
+    for (var i in keypairs) {
         keyName = keypairs[i].substring(0, keypairs[i].indexOf('='));
         keyValue = keypairs[i].substring((keypairs[i].indexOf('=')) + 1);
         while (keyValue.indexOf('+') > -1) {
