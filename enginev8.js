@@ -204,7 +204,7 @@ function ocvKeyPressed(e) {
     var keyCode = 0;
     if (navigator.appName == "Microsoft Internet Explorer") {
         if (!e) {
-            var x = window.event;
+            var e = window.event;
         }
         if (e.keyCode) {
             keyCode = e.keyCode;
