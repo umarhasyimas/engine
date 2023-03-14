@@ -1,3 +1,7 @@
+/*
+this code is for https://www.mahakurawa.my.id
+bug fixed by Muhammad Umar Hasyim Ashari
+*/
 var showIndex = Boolean(true);
 var indexSeparator = ' ';
 var showCaption = Boolean(true);
