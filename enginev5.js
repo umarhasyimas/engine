@@ -10,8 +10,8 @@ var pictureID = 'page';
 var captionID = 'caption';
 var indexID = 'index';
 var wrapOn = Boolean(true);
-var slideMode = Boolean(false);
-var slideDelay = 10;
+var SequentialView = Boolean(false);
+var sequentialDelay = 10; // Renamed variable
 var clickMode = Boolean(true);
 var pageALT = Boolean(true);
 
@@ -181,16 +181,16 @@ function buildIndex() {
     getObjectByID("index2").innerHTML = indexString;
 }
 
-function enableSlideMode(newDelay) {
-    slideMode = Boolean(true);
+function enableSequentialView(newDelay) {
+    SequentialView = Boolean(true);
     if (newDelay > 0) {
-        slideDelay = newDelay;
+        sequentialDelay = newDelay; // Updated variable
     }
     showpage(glbCurrentpage);
 }
 
-function disableSlideMode() {
-    slideMode = Boolean(false);
+function disableSequentialView() {
+    SequentialView = Boolean(false);
     clearTimeout(glbSlideTimer);
     showpage(glbCurrentpage);
 }
@@ -200,8 +200,8 @@ if (FORM_DATA.page > 0) {
     glbCurrentpage = 1;
 }
 if (FORM_DATA.slideMode == "true") {
-    slideMode = Boolean(true);
-    slideDelay = FORM_DATA.slideDelay;
+    SequentialView = Boolean(true);
+    sequentialDelay = FORM_DATA.slideDelay; // Updated variable
 }
 
 function omvKeyPressed(e) {
