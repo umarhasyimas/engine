@@ -64,16 +64,19 @@ function getObjectByID(id) {
 }
 
 function showpage(index) {
-    var theURL = "" + this.location;
-    if (theURL.indexOf("?") > 0) {
-        theURL = theURL.substring(0, theURL.indexOf("?"));
+    var mainImg = getObjectByID('mainpage');
+    mainImg.src = pages[index - 1];
+
+    if (showCaption == true) {
+        var pageCaption = getObjectByID(captionID);
+        pageCaption.innerHTML = captions[index - 1];
     }
-    theURL += "?page=" + index;
-    if (slideMode == true) {
-        theURL += "&slideMode=true";
-        theURL += "&slideDelay=" + slideDelay;
+    
+    glbCurrentpage = index;
+
+    if (showIndex == true) {
+        buildIndex();
     }
-    this.location = theURL;
 }
 
 function showNext() {
