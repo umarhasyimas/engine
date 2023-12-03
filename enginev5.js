@@ -14,6 +14,7 @@ var SequentialView = Boolean(false);
 var sequentialDelay = 10; // Renamed variable
 var clickMode = Boolean(true);
 var pageALT = Boolean(true);
+var preloadCount = 3; // Number of images to preload ahead
 
 function createRequestObject() {
     FORM_DATA = {};
@@ -138,19 +139,27 @@ function initpage() {
         buildIndex();
     }
     if ((preCache == true) && (glbCurrentpage < pages.length)) {
-        glbCacheTimer = setTimeout('cache(' + glbCurrentpage + ');', 500);
+        for (var i = 1; i <= preloadCount; i++) {
+            var nextPage = glbCurrentpage + i;
+            if (nextPage <= pages.length) {
+                cache(nextPage);
+            }
+        }
     }
-    if (slideMode == true) {
-        glbSlideTimer = setTimeout('showNext();', (slideDelay * 1000));
+
+    if (SequentialView == true) {
+        glbSlideTimer = setTimeout(showNext, (sequentialDelay * 1000));
     }
 }
 
 function cache(pageID) {
     if (getObjectByID('mainpage').complete) {
         clearTimeout(glbCacheTimer);
-        getObjectByID('cache').src = pages[pageID];
+        getObjectByID('cache').src = pages[pageID - 1];
     } else {
-        glbCacheTimer = setTimeout('cache(' + glbCurrentpage + ');', 500);
+        glbCacheTimer = setTimeout(function() {
+            cache(pageID);
+        }, 500);
     }
 }
 
