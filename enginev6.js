@@ -4,8 +4,6 @@ bug fixed by Muhammad Umar Hasyim Ashari
 Engine Version 6
 */
 
-"use strict";
-
 var showIndex = true;
 var indexSeparator = ' ';
 var showCaption = true;
