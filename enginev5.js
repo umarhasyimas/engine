@@ -156,9 +156,17 @@ function initpage() {
 }
 
 function cache(pageID) {
-    if (getObjectByID('mainpage').complete) {
+    var mainPageElement = getObjectByID('mainpage');
+    var cacheElement = getObjectByID('cache');
+
+    if (mainPageElement && mainPageElement.complete) {
         clearTimeout(glbCacheTimer);
-        getObjectByID('cache').src = pages[pageID - 1];
+        
+        if (cacheElement) {
+            cacheElement.src = pages[pageID - 1];
+        } else {
+            console.error('Element with ID "cache" not found.');
+        }
     } else {
         glbCacheTimer = setTimeout(function() {
             cache(pageID);
