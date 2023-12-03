@@ -159,18 +159,18 @@ function cache(pageID) {
     var mainPageElement = getObjectByID('mainpage');
     var cacheElement = getObjectByID('cache');
 
-    if (mainPageElement && mainPageElement.complete) {
-        clearTimeout(glbCacheTimer);
-        
-        if (cacheElement) {
-            cacheElement.src = pages[pageID - 1];
+    // Ensure cacheElement exists and pageID is valid
+    if (cacheElement && pageID >= 1 && pageID <= pages.length) {
+        if (mainPageElement && mainPageElement.complete) {
+            clearTimeout(glbCacheTimer);
+            cacheElement.src = pages[pageID - 1]; // Adjust index to match array indexing (if needed)
         } else {
-            console.error('Element with ID "cache" not found.');
+            glbCacheTimer = setTimeout(function() {
+                cache(pageID);
+            }, 500);
         }
     } else {
-        glbCacheTimer = setTimeout(function() {
-            cache(pageID);
-        }, 500);
+        console.error('Invalid pageID or element with ID "cache" not found.');
     }
 }
 
@@ -224,27 +224,9 @@ if (FORM_DATA.slideMode == "true") {
     sequentialDelay = FORM_DATA.slideDelay; // Updated variable
 }
 
-function omvKeyPressed(e) {
-    var keyCode = 0;
-    if (navigator.appName == "Microsoft Internet Explorer") {
-        if (!e) {
-            var e = window.event;
-        }
-        if (e.keyCode) {
-            keyCode = e.keyCode;
-            if ((keyCode == 37) || (keyCode == 39)) {
-                window.event.keyCode = 0;
-            }
-        } else {
-            keyCode = e.which;
-        }
-    } else {
-        if (e.which) {
-            keyCode = e.which;
-        } else {
-            keyCode = e.keyCode;
-        }
-    }
+function handleKeyPressed(event) {
+    var keyCode = event.keyCode || event.which;
+
     switch (keyCode) {
         case 37:
             showPrevious();
@@ -256,5 +238,7 @@ function omvKeyPressed(e) {
             return true;
     }
 }
-document.onkeydown = omvKeyPressed;
-indexSeparator = ' |  ';
+
+document.onkeydown = handleKeyPressed;
+var indexSeparator = ' | ';
+
