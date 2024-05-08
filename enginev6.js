@@ -73,7 +73,7 @@ function showpage(index) {
 function showNext() {
     if (glbCurrentpage >= pages.length) {
         if (wrapOn == true) {
-            self.location = "https://www.mahakurawa.my.id";
+            self.location = "https://mangafire-jp.blogspot.com";
         }
     } else {
         glbCurrentpage += 1;
