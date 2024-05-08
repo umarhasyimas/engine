@@ -14,7 +14,7 @@ var SequentialView = Boolean(false);
 var sequentialDelay = 10; // Renamed variable
 var clickMode = Boolean(true);
 var pageALT = Boolean(true);
-var preloadCount = 3; // Number of images to preload ahead
+var preloadCount = 2; // Number of images to preload ahead
 
 function createRequestObject() {
     FORM_DATA = {};
@@ -49,7 +49,6 @@ function createRequestObject() {
 }
 FORM_DATA = createRequestObject();
 var glbCacheTimer;
-var glbSlideTimer;
 var glbCurrentpage = 1;
 var pages = [];
 var captions = [];
@@ -61,6 +60,15 @@ function getObjectByID(id) {
     } else {
         return document.getElementById(id);
     }
+}
+
+function showpage(index) {
+    var theURL = "" + this.location;
+    if (theURL.indexOf("?") > 0) {
+        theURL = theURL.substring(0, theURL.indexOf("?"));
+    }
+    theURL += "?page=" + index;
+    this.location = theURL;
 }
 
 function showpage(index) {
